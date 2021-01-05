@@ -1,0 +1,59 @@
+.ui-datepicker, .ui-datepicker-month, .ui-datepicker-year{
+    font-family: 'Ozone', sans-serif !important;
+}
+
+.ui-datepicker-header{
+    background-color: transparent; 
+    border: none;
+}
+
+.ui-datepicker-prev{
+    background-image: url(../../../../assets/img/icon/left-arrow.png);
+    background-repeat: no-repeat;
+    background-size: 60% 60%;
+    background-position: center;
+}
+
+.ui-datepicker-prev:hover{
+    background-image: url(../../../../assets/img/icon/left-arrow.png);
+    background-color: transparent;
+    border: none;
+    background-repeat: no-repeat;
+    background-size: 60% 60%;
+    background-position: center;
+}
+
+.ui-datepicker-next{
+    background-image: url(../../../../assets/img/icon/right-arrow.png);
+    background-repeat: no-repeat;
+    background-size: 60% 60%;
+    background-position: center;
+}
+
+.ui-datepicker-next:hover{
+    background-image: url(../../../../assets/img/icon/right-arrow.png);
+    background-color: transparent;
+    border: none;
+    background-repeat: no-repeat;
+    background-size: 60% 60%;
+    background-position: center;
+}
+
+.ui-state-default {
+    text-align: center !important;
+    border: none !important;
+    background-color: transparent !important;
+}
+
+.ui-state-default:hover{
+    background-color: #EC1C29 !important;
+    color: #FFF !important; 
+}
+.ui-datepicker-today{
+    background-color: #EC1C29 !important;
+    color: #FFF !important; 
+}
+.ui-datepicker-today > a {
+    color: #FFF !important;
+}
+

@@ -1,0 +1,118 @@
+.pattern-list{
+    display: flex;
+    justify-content: center;
+    padding-top: 1%;
+    padding-bottom: 5%;
+}
+.pattern-list-container{
+    width: 80%;
+    height: 100%;
+}
+
+.pattern-list-group{
+    margin-top: 20px;
+    display:grid;
+    grid-template-columns: repeat(5,1fr);
+    grid-auto-rows: 250px;
+    grid-gap: 15px;
+}
+
+.pattern-item{
+    box-sizing: border-box;
+    /* padding: 5px 5px 0px 5px; */
+    background-color: #FFF;
+    transition: all 0.1s ease-out;
+}
+.pattern-item:hover{
+    transform: scale(1.25);
+    box-shadow: 0px 0px 7px 1px rgba(0,0,0,0.5);
+}
+.pattern-item:hover .pattern-name {
+    color: #FFF;
+    background-color: #565656; 
+}
+
+.pattern-item > a {
+    text-decoration: none;
+}
+.pattern-img{
+    width: 100%;
+    height: 80%;
+    background-image: url(../../../assets/img/pattern/img-pattern.jpg);
+    background-size: 100% 100%;
+}
+.pattern-name{
+    background-color: #FFF;
+    padding-top: 2%;
+    font-size: 24px;
+    color: #000;
+    height: 20%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* IPAD */
+@media screen and (max-width: 768px){
+    
+
+    
+}
+
+@media screen and (max-width: 1024px){
+
+    .pattern-list-group{
+        grid-template-columns: repeat(4,1fr);
+        grid-auto-rows: 250px;
+        grid-gap: 15px;
+    }
+
+}
+
+/* PHONE */
+@media only screen and (max-width: 415px) {
+
+    .pattern-list-group{
+        grid-template-columns: repeat(3,1fr);
+        grid-auto-rows: 150px;
+        grid-gap: 5px;
+    }
+    .pattern-name{
+        font-size: 18px;
+    }
+
+}
+/* นอน */
+@media only screen and (max-height: 500px) {
+
+    .pattern-list-group{
+        grid-template-columns: repeat(4,1fr);
+        grid-auto-rows: 200px;
+        grid-gap: 15px;
+    }
+    .pattern-name{
+        font-size: 18px;
+    }
+   
+}
+
+/* LG */
+
+@media only screen and (min-width: 1600px) {
+
+    .pattern-list-group{
+        grid-template-columns: repeat(6,1fr);
+        grid-auto-rows: 210px;
+        grid-gap: 15px;
+    }
+
+}
+
+@media only screen and (min-width: 1920px) {
+    .pattern-list-group{
+        grid-template-columns: repeat(8,1fr);
+        grid-auto-rows: 250px;
+        grid-gap: 15px;
+    }
+}

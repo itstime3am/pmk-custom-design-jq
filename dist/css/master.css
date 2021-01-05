@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'Ozone' ;
+    src: url('../../assets/font/DB\ Ozone\ X.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Ozone-Bold' ;
+    src: url('../../assets/font/DB\ Ozone\ X\ Bd.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Ozone-Medium' ;
+    src: url('../../assets/font/DB\ Ozone\ X\ Med.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Helvethaica' ;
+    src: url('../../assets/font/db\ helvethaica\ x.ttf') format('truetype');
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    font-family: 'Ozone', sans-serif !important;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    letter-spacing: 0.01em;
+}
+.page-view { background: linear-gradient(-160deg, rgba(255, 255, 255, 0.1).5%, rgba(89,98,105,0.4) 100%); width: 100%; height: 100%; position: relative; }
+.page-view { min-height: 100vh; }
+.pmk-logo-view { background-image:url(../../assets/img/pmk-logo.png); background-size: 100% 100%; }
+.pmk-logo-top-left { 
+    background-image:url(../../assets/img/pmk-logo.png); 
+    background-size: 100% 100%; 
+    position: absolute; 
+    margin-top: 1%;
+    margin-left: 1.2%;
+    width: 8%; 
+    height: 50px; 
+}
+table{border-collapse:collapse;}
+input, select, button, textarea { font-family: 'Ozone', sans-serif; }
+textarea { resize: none; }
+button { border: none; outline: none;  padding: 5px; border-radius: 3px; cursor: pointer;  }
+button:hover{ filter: brightness(90%); }
+a { color: #EC1C29;  text-decoration: none; font-size: 18px; }
+a:hover { text-decoration: underline; }
+.error-validation{ text-align: center; color: #EC1C29; font-size: 18px; margin: 0 !important; }
+.section-title{ font-size: 24px; color:#5A5A5C; }
+
+/* IPAD */
+@media screen and (max-width: 768px){
+
+}
+
+@media screen and (max-width: 1024px){
+    .pmk-logo-top-left { 
+        margin-top: 1%;
+        margin-left: 1.2%;
+        width: 8%; 
+        height: 40px; 
+    }
+}
+
+/* PHONE */
+@media only screen and (max-width: 415px) {
+    .pmk-logo-top-left { visibility: hidden; }
+}
+@media only screen and (max-height: 500px) {
+    .pmk-logo-top-left { visibility: hidden; }
+}

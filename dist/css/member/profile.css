@@ -1,0 +1,221 @@
+.profile{ width: 100%; display: flex; justify-content: center; padding: 10px 0px 0px 0px; }
+.profile-container{ width: 80%; padding-bottom: 5%; }
+
+.profile-panel{
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.left-menu-resp{ display: none; cursor: pointer; }
+.left-menu{ position: relative; transition: all 0.2s ease-out; width: 25%; }
+.member-detail{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 10px 0px 10px 0px;
+    background-color: lightgray;
+}
+.member-name{ font-size: 22px; }
+.member-img{
+    height: 80px;
+    width: 80px;
+    margin-bottom: 8px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    background-image: url(/assets/img/icon-user.png);
+    background-repeat: no-repeat;
+    background-size: 60% 60%;
+    background-position: center;
+}
+
+.member-menu{ margin-top: 5px; }
+.member-menu > * {
+    cursor: pointer;
+    font-size: 20px;
+    width: 100%;
+    padding: 8px 10px 8px 50px;
+    display: flex;
+    box-sizing: border-box;
+    background-color: lightgray;
+}
+.member-menu .-active{
+    box-shadow:inset 3px 0px 0px 0px #EC1C29;
+    border: 1px solid gray;
+    font-weight: bold;
+    border-left: 0px;
+}
+.log-out{ margin-top: 8px; }
+
+.display-menu{
+    width: 75%;
+    padding: 30px 10px 30px 10px;
+    font-size: 20px;
+    min-height: 350px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    background-color: #FFF;
+}
+.display-menu > * > *:not(:first-child){ margin-top: 10px; }
+.display-menu input{ font-size: 20px; padding: 5px; }
+
+/* DISPLAY PROFILE INFORMATION */
+.display-profile-information{
+    width: 80%;
+    display: none;
+}
+.div-row-full{ width: 100%; display: flex; flex-direction: column; }
+.div-row{ width: 100%; display: flex; justify-content: space-between; }
+.div-row > *{ width: 48%; display: flex; flex-direction: column; }
+.div-row .gender select{ width: 100%; font-size: 20px; padding: 5px; }
+.display-profile-information .btn-inform-submit-wrapper{ display: flex; justify-content: center; }
+.display-profile-information .btn-inform-submit{
+    margin-top: 20px;
+    width: 80%;
+    padding: 10px;
+    font-size: 20px;
+    background-color: #EC1C29;
+    color: #FFF;
+}
+
+/* DISPLAY Address */
+.display-address{ 
+    width: 100%;
+    display: none;  
+}
+.btn-new-address-wrapper{ width: 100%; display: flex; justify-content: flex-end; }
+.btn-new-address{ padding: 5px; font-size: 18px; background-color: green; color: #FFF;}
+tr.row, tr.header{ border-bottom: 1px solid #000; }
+tr.header{ background-color: lightgray; }
+tr.header > *{ padding: 5px; }
+.display-address .name{ width: 20%; padding: 5px; word-wrap: break-word; }
+.display-address .address{ width: 55%; padding: 5px; word-wrap: break-word; }
+.display-address .tel{ width: 12%; padding: 5px; word-wrap: break-word; }
+.display-address .alt{ width: 18%; padding: 5px; }
+.display-address .alt button.btn-shipping-address, .display-address .alt button.btn-tax-address {
+    margin-top: 5px;
+    font-size: 16px;
+    padding: 10px 0px 10px 0px;
+    width: 100%;
+    filter: opacity(0.8);
+}
+
+.display-address .alt button.btn-shipping-address.-active, .display-address .alt button.btn-tax-address.-active {
+    filter: opacity(1);
+    background-color: #EC1C29;
+    color: #FFF;
+}
+
+/* DISPLAY NEW ADDRESS */
+.display-new-address { 
+    width: 80%; 
+    /* display: none; */
+}
+.display-new-address textarea[name="address"]{ font-size: 20px; padding: 5px; height: 50px; }
+.sub-district select, .district select, .province select{ width: 100%; font-size: 20px; padding: 5px; }
+.address-type{ display: flex; }
+.address-type .row{ margin-right: 10px; display: flex; align-items: center; }
+.address-type span{ margin-top: 5px; padding-left: 3px; }
+.btn-display-new-address-wrapper{ padding-top: 20px; width: 100%; display: flex; justify-content: center; }
+.btn-cancel-new-address{ width: 30%; font-size: 25px; padding: 10px; }
+.btn-submit-new-address{
+    width: 30%;
+    font-size: 25px;
+    padding: 10px;
+    margin-left: 10px;
+    background-color: #EC1C29;
+    color: #FFF;
+}
+
+/* DISPLAY ACCOUNT */
+.display-account{
+    width: 80%;
+    display: none;
+}
+.btn-submit-new-password-wrapper{ width: 100%; padding-top: 10px; display: flex; justify-content: center; }
+.btn-submit-new-password{ padding: 10px; background-color: #EC1C29; font-size: 20px; color: #FFF; }
+
+/* IPAD */
+@media screen and (max-width: 768px), screen and (max-height: 1024px){
+
+}
+
+@media screen and (max-width: 1024px), screen and (max-height: 768px){
+
+}
+
+/* PHONE */
+@media only screen and (max-width: 415px) {
+
+    .profile-panel{ justify-content: flex-end; }
+    .left-menu{
+        width: 10%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        background-color: gray;
+    }
+    .left-menu-wrapper{ background-color: gray; }
+    .left-menu:not(.-active) *{ padding: 0px; }
+    .display-menu{ width: 90%; }
+    .left-menu-wrapper{ visibility: hidden; }
+    .left-menu-resp{ display: block; }
+    .left-menu.-active { width: 60%; }
+    .left-menu.-active .left-menu-resp{ text-align: right; }
+    .left-menu.-active .left-menu-wrapper{ visibility: visible; }
+    .member-menu > * { font-size: 14px; padding: 8px 10px 8px 10px; }
+    .member-detail > *{ font-size: 14px; }
+
+    /* DISPLAY PROFILE INFORMATION */
+    .display-profile-information > * { flex-direction: column; }
+    .div-row > *{ width: 100%; }
+    .div-row.date-picker{ margin-top: 10px; }
+    .div-row .tax-iden-no{ margin-top: 10px; }
+
+    /* DISPLAY ADDRESS */
+    .display-address{ font-size: 14px; }
+    .btn-new-address{ font-size: 14px; }
+
+    /* DISPLAY NEW ADDRESS */
+    .province, .sub-district, .district, .post-code{ width: 48%; }
+    .btn-cancel-new-address{ width: 40%; }
+    .btn-submit-new-address{ width: 40%; }
+
+}
+/* นอน */
+@media only screen and (max-height: 500px) {
+
+    .profile-panel{ justify-content: flex-end; }
+    .left-menu{
+        width: 10%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        background-color: gray;
+    }
+    .left-menu-wrapper{ background-color: gray; }
+    .left-menu:not(.-active) *{ padding: 0px; }
+    .display-menu{ width: 90%; }
+    .left-menu-wrapper{ visibility: hidden; }
+    .left-menu-resp{ display: block; }
+    .left-menu.-active { width: 60%; }
+    .left-menu.-active .left-menu-resp{ text-align: right; }
+    .left-menu.-active .left-menu-wrapper{ visibility: visible; }
+    .member-menu > * { padding: 8px 10px 8px 10px; }
+
+    /* DISPLAY PROFILE INFORMATION */
+    .display-profile-information > * { flex-direction: column; }
+    .div-row > *{ width: 100%; }
+    .div-row.date-picker{ margin-top: 10px; }
+    .div-row .tax-iden-no{ margin-top: 10px; }
+
+     /* DISPLAY ADDRESS */
+    .display-address{ font-size: 14px; }
+    .btn-new-address{  font-size: 14px; }
+
+    /* DISPLAY NEW ADDRESS */
+    .province, .sub-district, .district, .post-code{ width: 48%; }
+}

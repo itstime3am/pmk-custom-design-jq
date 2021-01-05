@@ -1,0 +1,64 @@
+.ui-dialog{ 
+    position: fixed !important; 
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    background-color: #FFF;
+    outline: none;
+}
+
+.ui-dialog-titlebar{
+    padding: 10px;
+    padding-bottom: 0;
+    font-size: 26px;
+    color: #000;
+    display: flex;
+    justify-content: space-between;
+}
+.ui-dialog-titlebar-close{
+    display: none;
+}
+.ui-dialog-content{
+    padding: 10px 5px 10px 5px;
+}
+.ui-dialog-buttonset{
+    margin: 5px 0px 15px 0px;
+    display: flex;
+    justify-content: center;
+}
+.ui-dialog-buttonset > button{
+    font-size: 20px;
+    width: 100px;
+    padding: 5px 10px 5px 10px;
+    background-color: #EC1C29;
+    color: #FFF;
+}
+.ui-dialog-buttonset > button:not(:first-child){
+    font-size: 20px;
+    background-color: #FFF;
+    color: #000;
+    border: 1px solid #000;
+}
+.ui-dialog-buttonset > *:not(:first-child){
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 480px) {
+    
+    .ui-dialog-titlebar{
+        font-size: 18px;
+    }
+    .ui-dialog-buttonset > button{
+        font-size: 16px;
+        width: 70px;
+        padding: 5px 10px 5px 10px;
+        background-color: #EC1C29;
+        color: #FFF;
+    }
+    .ui-dialog-buttonset > button:not(:first-child){
+        font-size: 16px;
+        background-color: #FFF;
+        color: #000;
+        border: 1px solid #000;
+    }
+}

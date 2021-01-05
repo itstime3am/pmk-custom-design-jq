@@ -1,0 +1,102 @@
+
+.login-container{ display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.login-form{
+    width: 380px;
+    /* margin-top: 10%; */
+    padding: 10px;
+    border-radius: 5px;
+}
+/* LOGIN FORM TOP */
+.login-form-top{
+    background-color: rgb(255, 255, 255,0.4); 
+    width: 100%;
+    padding: 10px 50px 10px 50px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.login-form-top > *:not(:first-child){
+    margin-top: 15px;
+}
+.pmk-logo{ display: flex; justify-content: center; padding: 20px; }
+.pmk-logo-view{
+    width: 60%;
+    height: 70px;
+}
+.input-form{
+    box-sizing: border-box;
+}
+.input-form > *:not(:first-child){
+    margin-top: 15px;
+}
+.input-username, .input-password{
+    background-color: #FFF;
+    border-radius: 7px;
+    display: flex;
+    padding: 10px 5px 10px 5px;
+}
+input[type="text"], input[type="password"]{
+    width: 100%;
+    font-size: 24px;
+    padding: 5px;
+    border: none;
+    outline: none;
+}
+.icon-user{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    margin-left: 5px;
+    background-image: url(../../../assets/img/icon-user.png);
+    background-size: 100% 100%;
+}
+.icon-password{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    margin-left: 5px;
+    background-image: url(../../../assets/img/icon-password.png);
+    background-size: 100% 100%;
+}
+.btn-login{
+    width: 100%;
+    height: 50px;
+    font-size: 28px;
+    color: #FFF;
+    background-color: #EC1C29;
+}
+.rmb-me-fg-pwd{
+    display: flex;
+    justify-content: space-between;
+}
+.rmb-me{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.rmb-me span{
+    margin-top: 3px;
+}
+/* LOGIN FORM TOP */
+
+/* LOGIN FORM BOTTOM */
+hr{ background-color: #EC1C29; height: 1.5px; margin: 20px 0px 3px 0px; }
+.register{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.register > span{
+    margin-right: 3px;
+}
+.btn-facebook-wrapper{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.btn-facebook{
+    width: 250px;
+    height: 50px;
+    background-image: url(../../../assets/img/btn-facebook.png);
+    background-size: 100% 100%;
+}
+/* LOGIN FORM BOTTOM */
