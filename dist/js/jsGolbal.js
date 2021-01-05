@@ -1,4 +1,12 @@
-
+var i18nError = {};
+i18nError['input_required'] = 'is required';
+i18nError['email_invalid'] = ' address is invalid';
+i18nError['password_!=_confirm_password'] = 'and password does not match';
+i18nError['input_6_12_characters'] = 'must have 6 -12 characters';
+i18nError['input_10_digit'] = 'must have at least 10 digit number';
+i18nError['input_contain_letter'] = 'must contain only letter';
+i18nError['input_contain_number'] = 'must contain only number';
+i18nError['input_contain_a-z0-9@_.'] = 'must contain only letter, number, dot, underscore and @';
 
 function formSubmitInput(_formClass, _varObject){
     var object = _varObject;

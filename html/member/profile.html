@@ -41,21 +41,21 @@
                         <div class="display-profile-information">
                             <div class="div-row-full">
                                 <span>ชื่อ - นามสกุล</span>
-                                <input class="user-input" type="text" name="name" placeholder="Name - Surname">
+                                <input class="user-input" type="text" data="name" name="name" placeholder="Name">
                             </div>
                             <div class="div-row-full">
                                     <span>E-mail</span>
-                                <input class="user-input" type="text" name="email" placeholder="Polomaker@gmail.com">
+                                <input class="user-input" type="text" data="email" name="email" placeholder="Polomaker@gmail.com">
                             </div>
                             <div class="div-row">
-                                <div class="tel">
+                                <div class="tel" style="display: flex; flex-direction: column;">
                                     <span>เบอร์โทรศัพท์</span>
-                                    <input class="user-input" type="text" name="tel" placeholder="0123456789">
+                                    <input class="user-input" type="text" data="telephoneNumber" name="telephone number" placeholder="0123456789">
                                 </div>
-                                <div class="div-row date-picker">
+                                <div class="div-row date-picker-wrapper">
                                     <span>วัน/เดือน/ปี เกิด</span>
                                     <div class="date-picker">
-                                        <input class="user-input" type="text" name="date_of_birth" id="date-picker" placeholder="DD/MM/YYYY">
+                                        <input class="user-input" type="text" data="dateOfBirth" name="date of birth" id="date-picker" placeholder="DD/MM/YYYY">
                                     </div>
                                 </div>
                             </div>
@@ -69,10 +69,10 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="tax-iden-no">
+                                <!-- <div class="tax-iden-no">
                                     <span>เลขประจำตัวผู้เสียภาษี</span>
-                                    <input class="user-input" type="text" name="tax_iden_no" placeholder="123456789">
-                                </div>
+                                    <input class="user-input" type="text" data="taxIdenNo" name="tax_iden_no" placeholder="123456789">
+                                </div> -->
                             </div>
                             <div class="btn-inform-submit-wrapper">
                                 <button class="btn-inform-submit">บันทึก</button>
@@ -125,29 +125,24 @@
                         </div>
                         <div class="display-new-address">
                             <div class="div-row-full">
-                                <span>ชื่อ - นามสกุล</span>
-                                <input class="user-input" type="text" name="name" placeholder="">
+                                <span>ชื่อ - นามสกุล / ชื่อบริษัท</span>
+                                <input class="user-input" type="text" data="name" name="name" placeholder="">
                             </div>
                             <div class="div-row-full">
                                 <span>เบอร์โทรศัพท์</span>
-                                <input class="user-input" type="text" name="tel" placeholder="">
+                                <input class="user-input" type="text" data="telephoneNumber" name="telephone number" placeholder="">
                             </div>
                             <div class="div-row-full">
-                                <span>ที่อยู่ปัจจุบัน</span>
-                                <textarea class="user-input" type="text" name="address" placeholder=""></textarea>
+                                <span>ที่อยู่</span>
+                                <textarea class="user-input" type="text" data="address" name="address" placeholder=""></textarea>
+                            </div>
+                            <div class="div-row-full">
+                                <span>เลขประจำตัวผู้เสียภาษี (หากมี)</span>
+                                <input class="user-input" type="text" data="taxId" name="tax ID" placeholder="">
                             </div>
                             <div class="div-row">
-                                <div class="sub-district">
-                                    <span>แขวง</span>
-                                    <div class="user-input-sel">
-                                        <select name="sub_district" id="">
-                                            <option value="1">แขวงบางแค</option>
-                                            <option value="2">แขวงบางแค2</option>
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="district">
-                                    <span>เขต</span>
+                                    <span>เขต/อำเภอ</span>
                                     <div class="user-input-sel">
                                         <select name="district" id="">
                                             <option value="1">เขตบางแค</option>
@@ -155,8 +150,6 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="div-row">
                                 <div class="province">
                                     <span>จังหวัด</span>
                                     <div class="user-input-sel">
@@ -166,9 +159,11 @@
                                         </select>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="div-row">
                                 <div class="post-code">
                                     <span>รหัสไปรษณีย์</span>
-                                    <input class="user-input" type="text" name="post_code" placeholder="">
+                                    <input class="user-input" type="text" data="postCode" name="post code" placeholder="">
                                 </div>
                             </div>
                             <div class="div-row-full">
@@ -179,22 +174,22 @@
                                 </div>
                             </div>
                             <div class="btn-display-new-address-wrapper">
-                                <button class="btn-cancel-new-address">ยกเลิก</button>
                                 <button class="btn-submit-new-address">บันทึก</button>
+                                <button class="btn-cancel-new-address">ยกเลิก</button>
                             </div>
                         </div>
                         <div class="display-account">
                             <div class="div-row-full">
                                 <span>รหัสผ่านเก่า</span>
-                                <input class="user-input" type="password" name="old_password" placeholder="">
+                                <input class="user-input" type="password" data="password" name="old password" placeholder="">
                             </div>
                             <div class="div-row-full">
-                                <span>รหัสผ่านใหม่</span>
-                                <input class="user-input" type="password" name="new_password" placeholder="">
+                                <span>ตั้งรหัสผ่านใหม่</span>
+                                <input class="user-input" type="password" data="newPassword" name="new password" placeholder="">
                             </div>
                             <div class="div-row-full">
                                 <span>ยืนยันรหัสผ่านใหม่</span>
-                                <input class="user-input" type="password" name="confirm_new_password" placeholder="">
+                                <input class="user-input" type="password" data="confirmPassword" name="confirm new password" placeholder="">
                             </div>
                             <div class="btn-submit-new-password-wrapper">
                                 <button class="btn-submit-new-password">ยืนยันการเปลี่ยนแปลง</button>
@@ -213,12 +208,5 @@
     <script src="../../dist/js/util/validation.js"></script>
     <script src="../../dist/js/jsGolbal.js"></script>
     <script src="../../dist/js/member/profile.js"></script>
-
-    <script>
-        $(document).ready(function () {
-
-            
-        });
-    </script>
 </body>
 </html>

@@ -6,7 +6,7 @@ $(document).ready(function () {
         authBody['password'] = regexPassword($('#input-password').val());
         var _json = JSON.stringify(authBody); 
         console.log(_json)
-        displayValidation('error-auth','Invalid Username / Password, Please Try Again')
+        $('.error-validation[name="error-auth"]').text('Invalid Username / Password, Please Try Again');
         $.ajax({
             type: "POST",
             url: "/url",
@@ -31,18 +31,21 @@ $(document).ready(function () {
 
         $('.register-form').find('.err').remove();
 
-        registerBody['secureQuestion'] = (sel_secure_question.children('option').attr('selected','selected').attr('value'));
-        // registerBody['secureQuestion'] = parseInt((sel_secure_question.children('option').attr('selected','selected').attr('value')));
+        registerBody['secureQuestion'] = (sel_secure_question.children('option:selected').attr('value'));
         $.each(inputs, function( index, value ) {
             // validate input regex
+            var data = $(this).attr('data');
             var name = $(this).attr('name');
             var value = $(this).val();
             var strError = validationFormRegister(name, value);
+            
             if(strError == ''){
-                registerBody[name] = value;
+                registerBody[data] = value;
                 validationForm = true;
-                $(this).css('border', 'none');
+                $(this).css('border', '1px solid green');
             }else{
+                strError = name+' '+i18nError[strError];
+                strError = strError.charAt(0).toUpperCase() + strError.slice(1);
                 validationForm = false;
                 $(this).css('border', '1px solid red');
                 $('<div class="err"><span></span><div class="err-text">'+strError+'</div></div>').insertAfter($(this).parent('.div-row'));
@@ -79,15 +82,25 @@ $(document).ready(function () {
         var validationForm = false;        
         var inputs = $('.register-form').find('.user-input');
 
+        $('.register-form').find('.err').remove();
+
         $.each(inputs, function( index, value ) {
             // validate input regex
-            if(validationFormRegister($(this))){
-                resetPasswordBody[$(this).attr('name')] = $(this).val();
+            var data = $(this).attr('data');
+            var name = $(this).attr('name');
+            var value = $(this).val();
+            var strError = validationFormRegister(name, value);
+            
+            if(strError == ''){
+                resetPasswordBody[data] = value;
                 validationForm = true;
-                $(this).css('border', 'none');
+                $(this).css('border', '1px solid green');
             }else{
+                strError = name+' '+i18nError[strError];
+                strError = strError.charAt(0).toUpperCase() + strError.slice(1);
                 validationForm = false;
                 $(this).css('border', '1px solid red');
+                $('<div class="err"><span></span><div class="err-text">'+strError+'</div></div>').insertAfter($(this).parent('.div-row'));
             }
         });
 
@@ -116,16 +129,27 @@ $(document).ready(function () {
         var inputs = $('.register-form').find('.user-input');
         var sel_secure_question = $('.secure-question');
 
+        $('.register-form').find('.err').remove();
+
         resetPasswordQuestionBody['secure_question'] = sel_secure_question.children('option').attr('selected','selected').attr('value');
+
         $.each(inputs, function( index, value ) {
             // validate input regex
-            if(validationFormRegister($(this))){
-                resetPasswordQuestionBody[$(this).attr('name')] = $(this).val();
+            var data = $(this).attr('data');
+            var name = $(this).attr('name');
+            var value = $(this).val();
+            var strError = validationFormRegister(name, value);
+            
+            if(strError == ''){
+                resetPasswordQuestionBody[data] = value;
                 validationForm = true;
                 $(this).css('border', 'none');
             }else{
+                strError = name+' '+i18nError[strError];
+                strError = strError.charAt(0).toUpperCase() + strError.slice(1);
                 validationForm = false;
                 $(this).css('border', '1px solid red');
+                $('<div class="err"><span></span><div class="err-text">'+strError+'</div></div>').insertAfter($(this).parent('.div-row'));
             }
         });
 

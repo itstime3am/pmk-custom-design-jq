@@ -21,6 +21,9 @@ $(document).ready(function () {
             eleDisplay.find('.'+display).css('display', 'block');
             eleDisplay.find('.'+display).siblings().css('display', 'none');
 
+            $('.display-menu .user-input').css('border', '1px solid gray');
+            $('.display-menu').find('.err').remove();
+
             $('.left-menu').removeClass('-active')
         }
     }); 
@@ -28,20 +31,35 @@ $(document).ready(function () {
     // HANDLE SUBMIT PROFILE INFORMATION 
     $('.btn-inform-submit').on('click',function(){
         var informationBody = {};
-        var validationForm = true;
+        var validationForm = false;
         var inputs = $('.display-profile-information').find('.user-input');
+        var sel_gender = $('.display-profile-information .user-input-sel select');
 
+        $('.display-menu .user-input').css('border', '1px solid gray');
+        $('.display-menu').find('.err').remove();
+
+        informationBody['gender'] = (sel_gender.children('option:selected').attr('value'));
+        
         $.each(inputs, function (index, ele) { 
-            if(!validationFormProfile(ele)){
-                validationForm = false;
-                $(this).css('border', '1px solid red')
+           // validate input regex
+           var data = $(this).attr('data');
+           var name = $(this).attr('name');
+           var value = $(this).val();
+           var strError = validationFormProfile(name, value);
+            if(strError == ''){
+                informationBody[data] = value;
+                validationForm = true;
+                $(this).css('border', '1px solid gray');
             }else{
-                $(this).css('border', '1px solid #000')
+                strError = name+' '+i18nError[strError];
+                strError = strError.charAt(0).toUpperCase() + strError.slice(1);
+                validationForm = false;
+                $(this).css('border', '1px solid red');
+                $('<div class="err"><span></span><div class="err-text">'+strError+'</div></div>').insertAfter($(this));
             }
         });
 
         if(validationForm){
-            formSubmitInput('display-profile-information', informationBody);
             var _json = JSON.stringify(informationBody); 
             console.log(_json)
             $.ajax({
@@ -66,17 +84,31 @@ $(document).ready(function () {
         var validationForm = true;
         var inputs = $('.display-account').find('.user-input');
 
+        $('.display-menu .user-input').css('border', '1px solid gray');
+        $('.display-menu').find('.err').remove();
+
         $.each(inputs, function (index, ele) { 
-            if(!validationFormProfile(ele)){
+            // validate input regex
+            var data = $(this).attr('data');
+            var name = $(this).attr('name');
+            var value = $(this).val();
+
+            var strError = validationFormProfile(name, value);
+
+            if(strError == ''){
+                newPasswordBody[data] = value;
+                validationForm = true;
+                $(this).css('border', '1px solid gray');
+             }else{
+                strError = name+' '+i18nError[strError];
+                strError = strError.charAt(0).toUpperCase() + strError.slice(1);
                 validationForm = false;
-                $(this).css('border', '1px solid red')
-            }else{
-                $(this).css('border', '1px solid #000')
-            }
+                $(this).css('border', '1px solid red');
+                $('<div class="err"><span></span><div class="err-text">'+strError+'</div></div>').insertAfter($(this));
+             }
         });
 
         if(validationForm){
-            formSubmitInput('display-account', newPasswordBody);
             var _json = JSON.stringify(newPasswordBody); 
             console.log(_json)
             $.ajax({
@@ -100,6 +132,13 @@ $(document).ready(function () {
     $('.btn-new-address').on('click', function(){
         $('.display-address').css('display', 'none');
         $('.display-new-address').css('display', 'block');
+    });
+
+    // HANDLE CANDLE NEW ADDRESS ON CLICK
+    $('.btn-cancel-new-address').on('click', function(){
+        $('.display-address').css('display', 'block');
+        $('.display-new-address').css('display', 'none');
+        $('.display-new-address').find('.user-input').val('');
     });
 
     // HANDLE SET DEFAULT SHIPPING ADDRESS
@@ -164,30 +203,44 @@ $(document).ready(function () {
         } 
     });
 
-    // HANDLE CANDLE NEW ADDRESS ON CLICK
-    $('.btn-cancel-new-address').on('click', function(){
-        $('.display-address').css('display', 'block');
-        $('.display-new-address').css('display', 'none');
-        $('.display-new-address').find('.user-input').val('');
-    });
-
     // HANDLE SUBMIT ADD NEW ADDRESS FORM
     $('.btn-submit-new-address').on('click', function(){
         var newAddressBody = {};
-        var validationForm = true;
+        var validationForm = false;
         var inputs = $('.display-new-address').find('.user-input');
+        var sel_district = $('.display-new-address .user-input-sel select[name="district"]');
+        var sel_province = $('.display-new-address .user-input-sel select[name="province"]');
+        var rdo_address_type = $('.display-new-address .user-input-radio.address-type').find('input[type=radio]:checked');
+
+        $('.display-menu .user-input').css('border', '1px solid gray');
+        $('.display-menu').find('.err').remove();
+
+        newAddressBody['district'] = (sel_district.children('option:selected').attr('value'));
+        newAddressBody['province'] = (sel_province.children('option:selected').attr('value'));
+        newAddressBody['addressType'] = (rdo_address_type.val());
 
         $.each(inputs, function (index, ele) { 
-            if(!validationFormProfile(ele)){
-                validationForm = false;
-                $(this).css('border', '1px solid red')
-            }else{
-                $(this).css('border', '1px solid #000')
-            }
+              // validate input regex
+              var data = $(this).attr('data');
+              var name = $(this).attr('name');
+              var value = $(this).val();
+  
+              var strError = validationFormProfile(name, value);
+  
+              if(strError == ''){
+                newAddressBody[data] = value;
+                  validationForm = true;
+                  $(this).css('border', '1px solid gray');
+               }else{
+                  strError = name+' '+i18nError[strError];
+                  strError = strError.charAt(0).toUpperCase() + strError.slice(1);
+                  validationForm = false;
+                  $(this).css('border', '1px solid red');
+                  $('<div class="err"><span></span><div class="err-text">'+strError+'</div></div>').insertAfter($(this));
+               }
         });
 
         if(validationForm){
-            formSubmitInput('display-new-address', newAddressBody);
             var _json = JSON.stringify(newAddressBody); 
             console.log(_json)
             $.ajax({

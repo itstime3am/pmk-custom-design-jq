@@ -68,8 +68,8 @@
     display: none;
 }
 .div-row-full{ width: 100%; display: flex; flex-direction: column; }
-.div-row{ width: 100%; display: flex; justify-content: space-between; }
-.div-row > *{ width: 48%; display: flex; flex-direction: column; }
+.div-row{ width: 100%; display: flex; }
+.div-row > *{ width: 85%; display: flex; flex-direction: column; }
 .div-row .gender select{ width: 100%; font-size: 20px; padding: 5px; }
 .display-profile-information .btn-inform-submit-wrapper{ display: flex; justify-content: center; }
 .display-profile-information .btn-inform-submit{
@@ -80,7 +80,10 @@
     background-color: #EC1C29;
     color: #FFF;
 }
-
+.date-picker-wrapper{ margin-left: 20px; }
+.gender{
+    width: 20%;
+}
 /* DISPLAY Address */
 .display-address{ 
     width: 100%;
@@ -115,6 +118,10 @@ tr.header > *{ padding: 5px; }
     /* display: none; */
 }
 .display-new-address textarea[name="address"]{ font-size: 20px; padding: 5px; height: 50px; }
+.display-new-address .div-row{
+    justify-content: space-between;
+}
+.province, .sub-district, .district, .post-code{ width: 48%; }
 .sub-district select, .district select, .province select{ width: 100%; font-size: 20px; padding: 5px; }
 .address-type{ display: flex; }
 .address-type .row{ margin-right: 10px; display: flex; align-items: center; }
@@ -129,7 +136,6 @@ tr.header > *{ padding: 5px; }
     background-color: #EC1C29;
     color: #FFF;
 }
-
 /* DISPLAY ACCOUNT */
 .display-account{
     width: 80%;
@@ -172,7 +178,7 @@ tr.header > *{ padding: 5px; }
     /* DISPLAY PROFILE INFORMATION */
     .display-profile-information > * { flex-direction: column; }
     .div-row > *{ width: 100%; }
-    .div-row.date-picker{ margin-top: 10px; }
+    .div-row.date-picker-wrapper{ margin-top: 10px; margin-left: 0; }
     .div-row .tax-iden-no{ margin-top: 10px; }
 
     /* DISPLAY ADDRESS */
@@ -209,7 +215,7 @@ tr.header > *{ padding: 5px; }
     /* DISPLAY PROFILE INFORMATION */
     .display-profile-information > * { flex-direction: column; }
     .div-row > *{ width: 100%; }
-    .div-row.date-picker{ margin-top: 10px; }
+    .div-row.date-picker-wrapper{ margin-top: 10px; margin-left: 0; }
     .div-row .tax-iden-no{ margin-top: 10px; }
 
      /* DISPLAY ADDRESS */

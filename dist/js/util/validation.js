@@ -1,9 +1,4 @@
 
-
-function displayValidation(_eleName, _text){
-    $('.error-validation[name="'+_eleName+'"]').text(_text);
-}
-
 function validationFormRegister(_name, _val) {
     switch (_name) {
         case 'username':
@@ -12,7 +7,7 @@ function validationFormRegister(_name, _val) {
         case 'password':
             return regexPassword(_val);
             break;
-        case 'confirmPassword':
+        case 'confirm password':
              // check match btw password & confirm_password
             var password = $('.register-form').find('input[name="password"]').val();
             return regexConfirmPassword(password, _val);
@@ -20,69 +15,54 @@ function validationFormRegister(_name, _val) {
         case 'name':
             return regexName(_val);
             break;
-        case 'tel':
+        case 'telephone number':
             return regexTelNumber(_val);
             break;
         case 'email':
             return regexEmail(_val);
             break;    
-        case 'lineId':
+        case 'line id':
             return '';
             break;
-        case 'secureAns':
-            return _val != '' ? '' : '*' ;
+        case 'secure answer':
+            return _val != '' ? '' : 'input_required' ;
             break;  
     }
 }
 
-function validationFormProfile(_input) {
-    var _inputName = $(_input).attr('name');
-    var _inputVal = $(_input).val();
-    
-    switch (_inputName) {
-        case 'old_password':
-            return regexPassword(_inputVal) != '' ? true : false;
+function validationFormProfile(_name, _val) {
+    switch (_name) {
+        case 'old password':
+        case 'new password':
+            return regexPassword(_val);
             break;
-        case 'new_password':
-        case 'confirm_new_password':
-            if(regexPassword(_inputVal) != '' ){
-                // check match btw password & confirm_password
-                var password = $('.display-account').find('input[name="new_password"]').val();
-                var confirm_password = $('.display-account').find('input[name="confirm_new_password"]').val();
-                if(password != confirm_password){
-                    return false;
-                }else{
-                    return true;
-                }
-            }else{
-                return false;
-            }
+        case 'confirm new password':
+             // check match btw password & confirm_password
+            var password = $('.display-account').find('input[name="new password"]').val();
+            return regexConfirmPassword(password, _val);
             break;
-        case 'address':
-        case 'post_code':
-            return _inputVal != '' ? true : false ;
+        case 'tax ID':
+            return regexTaxID(_val);
             break;
         case 'name':
-            return regexLetterOnly(_inputVal) != '' ? true : false;
+            return regexName(_val);
             break;
-        case 'tel':
-            return regexTelNumber(_inputVal) != '' ? true : false;
+        case 'telephone number':
+            return regexTelNumber(_val);
             break;
         case 'email':
-            if(_inputVal){
-                return regexEmail(_inputVal) != '' ? true : false;
-            }else{
-                return true;
-            }
+            return regexEmail(_val);
+            break;    
+        case 'post code':
+            return regexPostCode(_val);
+            break;
+        case 'date of birth':
+        case 'line id':
+            return '';
+            break;
+        case 'address':
+        case 'secure answer':
+            return _val != '' ? '' : 'input_required' ;
             break;  
-        case 'tax_iden_no':
-            if(_inputVal){
-                return regexTelNumber(_inputVal) != '' ? true : false;
-            }else{
-                return true;
-            }
-            break;  
-        default:
-            return true;
     }
 }
