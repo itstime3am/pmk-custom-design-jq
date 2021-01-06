@@ -44,8 +44,7 @@ $(document).ready(function () {
                 validationForm = true;
                 $(this).css('border', '1px solid green');
             }else{
-                strError = name+' '+i18nError[strError];
-                strError = strError.charAt(0).toUpperCase() + strError.slice(1);
+                strError = i18nError[strError];
                 validationForm = false;
                 $(this).css('border', '1px solid red');
                 $('<div class="err"><span></span><div class="err-text">'+strError+'</div></div>').insertAfter($(this).parent('.div-row'));
@@ -66,7 +65,7 @@ $(document).ready(function () {
                 success: function (data, textStatus, jqXHR) {
                     
                 }
-                , error: function (jqXHR, textStatus, errorThrown) {
+                ,error: function (jqXHR, textStatus, errorThrown) {
                 
                 }
             });
@@ -77,6 +76,7 @@ $(document).ready(function () {
         _DLG_READ_TERM.dialog('option', 'title', 'ข้อกำหนดและเงื่อนไข').dialog("open");
     });
 
+    // HANDLE SUBMIT RESET PASSWORD
     $('.btn-reset-password').on('click', function(){
         var resetPasswordBody = {};
         var validationForm = false;        
@@ -96,8 +96,7 @@ $(document).ready(function () {
                 validationForm = true;
                 $(this).css('border', '1px solid green');
             }else{
-                strError = name+' '+i18nError[strError];
-                strError = strError.charAt(0).toUpperCase() + strError.slice(1);
+                strError = i18nError[strError];
                 validationForm = false;
                 $(this).css('border', '1px solid red');
                 $('<div class="err"><span></span><div class="err-text">'+strError+'</div></div>').insertAfter($(this).parent('.div-row'));
@@ -123,6 +122,7 @@ $(document).ready(function () {
         }
     });
 
+    // HANDLE SUBMIT RESET PASSWORD QUESTION
     $('.btn-reset-password-question').on('click', function(){
         var resetPasswordQuestionBody = {};
         var validationForm = false;        
@@ -131,7 +131,7 @@ $(document).ready(function () {
 
         $('.register-form').find('.err').remove();
 
-        resetPasswordQuestionBody['secure_question'] = sel_secure_question.children('option').attr('selected','selected').attr('value');
+        resetPasswordQuestionBody['secureQuestion'] = sel_secure_question.children('option').attr('selected','selected').attr('value');
 
         $.each(inputs, function( index, value ) {
             // validate input regex
@@ -145,8 +145,7 @@ $(document).ready(function () {
                 validationForm = true;
                 $(this).css('border', 'none');
             }else{
-                strError = name+' '+i18nError[strError];
-                strError = strError.charAt(0).toUpperCase() + strError.slice(1);
+                strError = i18nError[strError];
                 validationForm = false;
                 $(this).css('border', '1px solid red');
                 $('<div class="err"><span></span><div class="err-text">'+strError+'</div></div>').insertAfter($(this).parent('.div-row'));

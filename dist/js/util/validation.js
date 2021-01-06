@@ -7,7 +7,7 @@ function validationFormRegister(_name, _val) {
         case 'password':
             return regexPassword(_val);
             break;
-        case 'confirm password':
+        case 'confirm_password':
              // check match btw password & confirm_password
             var password = $('.register-form').find('input[name="password"]').val();
             return regexConfirmPassword(password, _val);
@@ -15,17 +15,17 @@ function validationFormRegister(_name, _val) {
         case 'name':
             return regexName(_val);
             break;
-        case 'telephone number':
+        case 'telephone_number':
             return regexTelNumber(_val);
             break;
         case 'email':
             return regexEmail(_val);
             break;    
-        case 'line id':
+        case 'line_id':
             return '';
             break;
-        case 'secure answer':
-            return _val != '' ? '' : 'input_required' ;
+        case 'secure_answer':
+            return _val != '' ? '' : 'input_secure_ans_required' ;
             break;  
     }
 }
@@ -36,33 +36,35 @@ function validationFormProfile(_name, _val) {
         case 'new password':
             return regexPassword(_val);
             break;
-        case 'confirm new password':
+        case 'confirm_new_password':
              // check match btw password & confirm_password
             var password = $('.display-account').find('input[name="new password"]').val();
             return regexConfirmPassword(password, _val);
             break;
-        case 'tax ID':
+        case 'tax_ID':
             return regexTaxID(_val);
             break;
         case 'name':
             return regexName(_val);
             break;
-        case 'telephone number':
+        case 'telephone_number':
             return regexTelNumber(_val);
             break;
         case 'email':
             return regexEmail(_val);
             break;    
-        case 'post code':
+        case 'post_code':
             return regexPostCode(_val);
             break;
         case 'date of birth':
-        case 'line id':
+        case 'line_id':
             return '';
             break;
         case 'address':
-        case 'secure answer':
-            return _val != '' ? '' : 'input_required' ;
+            return _val != '' ? '' : 'input_address_required';
+            break;
+        case 'secure_answer':
+            return _val != '' ? '' : 'input_secure_ans_required' ;
             break;  
     }
 }

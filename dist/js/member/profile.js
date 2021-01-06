@@ -51,8 +51,7 @@ $(document).ready(function () {
                 validationForm = true;
                 $(this).css('border', '1px solid gray');
             }else{
-                strError = name+' '+i18nError[strError];
-                strError = strError.charAt(0).toUpperCase() + strError.slice(1);
+                strError = i18nError[strError];
                 validationForm = false;
                 $(this).css('border', '1px solid red');
                 $('<div class="err"><span></span><div class="err-text">'+strError+'</div></div>').insertAfter($(this));
@@ -100,8 +99,7 @@ $(document).ready(function () {
                 validationForm = true;
                 $(this).css('border', '1px solid gray');
              }else{
-                strError = name+' '+i18nError[strError];
-                strError = strError.charAt(0).toUpperCase() + strError.slice(1);
+                strError = i18nError[strError];
                 validationForm = false;
                 $(this).css('border', '1px solid red');
                 $('<div class="err"><span></span><div class="err-text">'+strError+'</div></div>').insertAfter($(this));
@@ -232,8 +230,7 @@ $(document).ready(function () {
                   validationForm = true;
                   $(this).css('border', '1px solid gray');
                }else{
-                  strError = name+' '+i18nError[strError];
-                  strError = strError.charAt(0).toUpperCase() + strError.slice(1);
+                  strError = i18nError[strError];
                   validationForm = false;
                   $(this).css('border', '1px solid red');
                   $('<div class="err"><span></span><div class="err-text">'+strError+'</div></div>').insertAfter($(this));
