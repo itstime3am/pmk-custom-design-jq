@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-    var initModel =  renderModel();
+    var initModel =  renderModel('data');
     var initMenu =  renderMenu();
     var initFabricGroup =  renderFabricGroup();
     var initColorPanel =  renderColorPanel();
@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 });
 
-function renderModel() {
+function renderModel(data, viewSide) {
 //   ,shadow_body: "../../../assets/model-pattern/shadow/font_body_1.png"
 //   ,shadow_arms: "../../../assets/model-pattern/shadow/font_arms_1.png"
    var  objectModel =  {
@@ -59,9 +59,9 @@ function renderModel() {
         $('.model-show').empty()
         // ---
         var side = key;
-        var arrParts = objectModel['front'];
+        var arrParts = viewSide ? objectModel[viewSide] :  objectModel['front'];
 
-        arrParts.forEach(item => {
+        $.each(arrParts, function (index, item) { 
             var name = item['name'];
             var path = item['path'];
 
@@ -136,8 +136,8 @@ function renderMenu() {
             ,subMenu:[]
         }
     ]
-    
-    arrMenu.forEach(item => {
+
+    $.each(arrMenu, function (index, item) { 
         var eleMenuRow = $('<div class="menu-row"></div>');
         var eleMenuRowItem = $('<div class="menu-row-item"></div>');
 
@@ -154,7 +154,8 @@ function renderMenu() {
         if(item['isSubMenu']){
             var collapse = $('<div class="collapse" id="'+item['i18n']+'" data-parent="#acc-coll-menu">');
             var subMenuGroup = $('<div class="menu-sel-group">');
-            arrSubMenu.forEach(item => {
+
+            $.each(arrSubMenu, function (index, item) { 
                 var eleSubMenuItem = $('<div class="item"></div>');
                 var eleSubMenuImg = $('<div class="img"></div>').css('background-image', 'url(../../../assets/img/pattern/img-pattern.jpg)');
                 var eleSubMenuName = $('<div class="name"><span>'+item['name']+'</span></div>');
@@ -168,12 +169,8 @@ function renderMenu() {
             $(collapse).appendTo(eleMenuRowItem);
         }
         
-
-
         $(eleMenuRow).appendTo($('.menu-group'));
     });
-
-    // console.log(eleMenuRowItem.find('.header'));
 }
 
 function renderFabricGroup(){
@@ -196,7 +193,7 @@ function renderFabricGroup(){
         }
     ]
 
-    arrFabric.forEach(item => {
+    $.each(arrFabric, function (index, item) { 
         var ele = $('<div class="test"></div>').addClass('fabric-item');
         var fabricName = $('<span class="fabric-name"></span>').text(item.name.toUpperCase());
         var fabricDesc = $('<span class="fabric-desc"></span>').text(item.description)
@@ -299,11 +296,12 @@ function renderPosition() {
         $.each(objectPosition[side], function (index, item) { 
             var name = item['name'] || false;
             var elePosition = $('<div class="position-item"></div>') || false;
-            var inputRadioPosition = $('<input type="radio" name="position" id=""><span>'+name+'</span>') || false;
+            var inputRadio = $('<input type="radio" name="position"><span>'+name+'</span>') || false;
 
-            index === 0 ? inputRadioPosition.attr('checked',true) : false;
+            // index == 0 ? inputRadio.attr('checked',true) : false;
+            index == 0 ? console.log(index): false;
 
-            $(inputRadioPosition).appendTo(elePosition);
+            $(inputRadio).appendTo(elePosition);
             $(elePosition).appendTo(groupPosition);
             $(groupPosition).insertAfter($('.position')); 
         });
@@ -321,7 +319,9 @@ function renderScreenType() {
         var name = item['name'];
 
         var eleTypeItem = $('<div class="screen-type-item"></div>');
-        var inputRadio = $('<input type="radio" name="type" id="" checked><span>'+name+'</span>');
+        var inputRadio = $('<input type="radio" name="type"><span>'+name+'</span>');
+
+        index === 0 ? inputRadio.attr('checked',true) : false; 
 
         $(inputRadio).appendTo(eleTypeItem);
         $(eleTypeItem).appendTo($('.screen-type-group'));

@@ -194,11 +194,6 @@ section.insp { padding-bottom: 40px; margin-top: 10px; border-top: 1px solid bla
 .position-group .position-item { display: flex; align-items: center; margin-right: 5px; }
 .position-group { 
     margin-top: 7px; 
-    /* display: grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-auto-rows: 20px;
-    grid-gap: 10px;
-    grid-row-gap: 3px; */
     display: flex;
     flex-wrap: wrap;
 }
@@ -209,13 +204,8 @@ section.insp { padding-bottom: 40px; margin-top: 10px; border-top: 1px solid bla
 .screen-type-group { 
     display: flex;
     flex-wrap: wrap;
-    /* display: grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-auto-rows: 20px;
-    grid-gap: 10px;
-    grid-row-gap: 3px; */
 }
-.upload-img { background-color: #E6E7E8; padding: 10px 5px 10px 5px; margin-top: 10px; }
+.upload-img { background-color: #E6E7E8; padding: 10px 5px 10px 5px; margin-top: 10px; cursor: pointer; }
 .btn-upload-img { width: 100%; height: 25px; cursor: pointer; display: flex; align-items: flex-end; }
 .btn-upload-img span { height: 100%; font-size: 30px; line-height: 36px; margin-left: 10px; }
 .btn-upload-img .img { background-image: url('../../../assets/img/icon/icon-upload.png'); background-size: 100% 100%; width: 20%; height: 100%; }

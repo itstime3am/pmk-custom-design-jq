@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom/dist/panzoom.min.js"></script>
+    <title>Document</title>
+    <style>
+        #canvas-wrapper {
+            position: absolute;
+        }
+        .out-canver{
+            position: absolute;
+        }
+        .in-canver{
+            left: 130px;
+            top: 140px;
+            position: absolute;
+        }
+        .c-bg {
+            border: 1px solid #999;
+        }
+        .c-draw{
+            left: 100px;
+            top: 100px;
+            border: 1px solid transparent;
+            transform: scale(0.99);
+        }
+        button {
+            margin-top: 20px;
+        }
+        .input-wrapper{
+            height: 200px;
+        }
+        .input-text, .text-warp, .input-img{
+            margin: 10px 0px 0px 450px;
+        }
+    </style>
+    <style>
+        .zoom-wrapper{
+            width: 400px;
+            height: 400px;
+            overflow: hidden;
+            border: 1px solid pink;
+            transform: scale(1.1);
+        }
+
+        .panzoom{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+   <section>
+    <div class="zoom-wrapper">
+        <div class="panzoom">  
+            <div id="canvas-wrapper">
+                <div class="zoom-wrapper">
+                    <div id="panzoom">
+                        <div class="out-canver">
+                            <canvas class="c-bg" width="400px" height="400px" id="c-bg"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="in-canver">
+                    <canvas class="c-draw" width="150px" height="220px" id="c-draw"></canvas>
+                    <img src="./remove.png" class="deleteBtn" style="position:absolute;cursor:pointer;width:23px;height:23px;z-index:2;opacity:0;"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="input-wrapper">
+            <div class="input-text">
+                <label for="inputText">Input Text</label>
+                <input class="inputText" name="text-1" type="text">
+                <button class="btn-test">test</button>
+                <button class="btn-underline">U̲</button>
+                <button class="btn-remove">-</button>
+                <button class="btn-remove-all">--</button>
+                <label for="color :">Color : </label>
+                <select class="sel-color" name="" id="">
+                    <option value="">--</option>
+                    <option value="red">red</option>
+                    <option value="blue">blue</option>
+                    <option value="green">green</option>
+                </select>             	
+                <button id="convert">Convert Text/Curved</button>
+                <button id="save">Save/Reload</button>
+            </div>
+            <div class="text-warp">
+                Reverse : <input type="checkbox" name="reverse" id="reverse" /><br>
+                Radius : <input type="range" min="100" max="500" value="0" id="radius" name="diameter" /><br>
+                <!-- Spacing : <input type="range" min="-10" max="10" value="0" id="spacing" name="kerning" /><br> -->
+                FontSize : <input type="range" min="16" max="100" value="0" id="fontSize" name="fontSize" /><br>
+            </div>
+
+            <div class="input-img">
+                Image : 
+                <input type="file" name="" id="input-img">
+            </div>
+        </div>
+   </section>
+    <script src="./fabric.js-4.2.0/dist/fabric.min.js"></script>
+    <script src="./fabric-curve.js"></script>
+    <!-- <script src="./fabricjs-customise-controls-extension-gh-pages/dist/customiseControls.min.js"></script> -->
+    <script>
+        var canvas = new fabric.Canvas('c-bg');
+        var canvasDraw = new fabric.Canvas('c-draw');
+        intiBg()
+
+        fabric.Object.prototype.set({
+            transparentCorners: false,
+            cornerColor: "rgba(102,153,255,0.5)",
+            cornerSize: 8,
+            padding: 5
+        });
+
+        // tyle="position:absolute;top:'+btnTop+'px;left:'+btnLeft+'px;cursor:pointer;width:20px;height:20px;"/>';
+        function editDeleteBtn(x, y){
+            var btnLeft = x-10;
+            var btnTop = y-10;
+            $(".deleteBtn").css('top', btnTop); 
+            $(".deleteBtn").css('left', btnLeft); 
+            $(".deleteBtn").css('opacity', 1); 
+        }
+
+        canvas.on('object:moving', function(e) {
+            console.log(e.transform)
+        });
+
+        canvasDraw.on('object:selected',function(e){
+            editDeleteBtn(e.target.oCoords.tr.x, e.target.oCoords.tr.y);
+        });
+        
+        canvasDraw.on('object:modified',function(e){
+            editDeleteBtn(e.target.oCoords.tr.x, e.target.oCoords.tr.y);
+        });
+
+        canvasDraw.on('object:scaling',function(e){
+            $(".deleteBtn").css('opacity', 0); 
+        });
+        canvasDraw.on('object:moving',function(e){
+            $(".deleteBtn").css('opacity', 0); 
+        });
+        canvasDraw.on('object:rotating',function(e){
+            $(".deleteBtn").css('opacity', 0); 
+        });
+
+        canvasDraw.on('mouse:down', function() {
+            var currObj = canvasDraw.getActiveObject();
+            console.log(1111)
+            if(currObj != null){
+                editDeleteBtn(currObj.oCoords.tr.x, currObj.oCoords.tr.y);
+                $('.c-draw').css('border','1px solid blue')
+                if (getType(currObj,'text')) {
+                    $('.inputText').val(currObj.text); 
+                } else if( getType(currObj, 'text-curved')){
+                    var text = currObj.text;
+                    var radius = currObj.diameter;
+                    var spacing = currObj.kerning;
+                    var fontSize = currObj.fontSize;
+                    var isFlip = currObj.flipped;
+                    console.log(isFlip)
+                    $('#radius').val(radius);
+                    $('#spacing').val(spacing);
+                    $('#fontSize').val(fontSize);
+                    $('#reverse').prop('checked', isFlip)
+                    $('.inputText').val(text); 
+                } else{
+                    $('#radius').val(0);
+                    $('#spacing').val(0);
+                    $('#fontSize').val(0);
+                    $('#reverse').prop('checked', false)
+                    $('.inputText').val(''); 
+                }
+            }else{
+                $( ".deleteBtn" ).css('opacity', 0);
+                $('.c-draw').css('border','none')
+                $('.inputText').val(''); 
+            }
+        })
+
+        canvasDraw.on('object:moving', function(e) {
+            var padding = 0;
+            var obj = e.target;
+            // if object is too big ignore
+            if (obj.currentHeight > obj.canvas.height - padding * 2 ||
+                obj.currentWidth > obj.canvas.width - padding * 2) {
+                return;
+            }
+            obj.setCoords();
+
+            // top-left corner
+            if (obj.getBoundingRect().top < padding ||
+                obj.getBoundingRect().left < padding) {
+                obj.top = Math.max(obj.top, obj.top - obj.getBoundingRect().top + padding);
+                obj.left = Math.max(obj.left, obj.left - obj.getBoundingRect().left + padding);
+            }
+            
+            // bot-right corner
+            if (obj.getBoundingRect().top + obj.getBoundingRect().height > obj.canvas.height - padding || 
+                obj.getBoundingRect().left + obj.getBoundingRect().width > obj.canvas.width - padding) {
+                obj.top = Math.min(
+                    obj.top,
+                    obj.canvas.height - obj.getBoundingRect().height + obj.top - obj.getBoundingRect().top - padding);
+                obj.left = Math.min(
+                    obj.left,
+                    obj.canvas.width - obj.getBoundingRect().width + obj.left - obj.getBoundingRect().left - padding);
+            }
+        });
+
+        $(document).ready(function () {
+
+            $('#canvas-wrapper .in-canver').mouseover(function(){
+                disableScrolling()
+                console.log(1)
+            })
+
+            $('#canvas-wrapper .out-canver').mouseout(function(){
+                console.log(444)
+                enableScrolling()
+            });
+
+            $('#canvas-wrapper .out-canver').mouseover(function(){
+                disableScrolling()
+                $(this).bind('mousewheel', function(e) {
+                    var defaultTransform = $('.panzoom').css('transform')
+                    if(e.originalEvent.wheelDelta / 120 > 0) {
+                        if(defaultTransform == 'none'){
+                            $('.panzoom').css('transform', 'scale(1.01)')
+                        }else{
+                            var defaultScale = parseFloat(defaultTransform.substring(7,11))
+                            if(defaultScale < 1.60) $('.panzoom').css('transform', 'scale('+(defaultScale+0.05)+')');
+                        }
+                    } else {
+                        if(defaultTransform == 'none'){
+                            $('.panzoom').css('transform', 'scale(1.01)')
+                        }else{
+                            var defaultScale = parseFloat(defaultTransform.substring(7,11))
+                            if(defaultScale >= 1 ) $('.panzoom').css('transform', 'scale('+(defaultScale-0.05)+')');
+                        }
+                    }
+                });
+            })
+
+
+            $('.deleteBtn').click(function(){
+                var currObj = canvasDraw.getActiveObject();
+                if(canvasDraw.remove(currObj)){
+                    $('.inputText').val('');
+                }
+                $(this).css('opacity', 0)
+            });
+
+            $('#radius, #spacing, #fontSize').on('input change',function(){
+                var currObj = canvasDraw.getActiveObject();
+                var varSet = $(this).attr('name');
+                console.log(varSet)
+                if(currObj){
+                    currObj.set($(this).attr('name'),$(this).val()); 
+                }
+                canvasDraw.renderAll();
+            });
+
+            $("#reverse").on('change', function(){
+                var currObj = canvasDraw.getActiveObject();
+                if(getType(currObj, 'text-curved')) {
+                    var isFlip = currObj.flipped;
+                    currObj.set({flipped: !isFlip})
+                    canvasDraw.renderAll()
+                }
+            });
+
+            $('#convert').click(function(){
+                var props = {};
+                var currObj = canvasDraw.getActiveObject();
+                if(currObj){
+                    if(getType(currObj, 'text-curved')) {
+                        default_text = currObj.text;
+                        props = currObj.toObject();
+                        delete props['type'];
+                        var textSample = new fabric.Text(default_text, props);
+                    }else if(getType(currObj, 'text')) {
+                        default_text = currObj.text;
+                        props = currObj.toObject();
+                        delete props['type'];
+                        props['textAlign'] = 'center';
+                        props['radius'] = 50;
+                        props['spacing'] = 20;
+                        var textSample = createCurveText('',props)
+                    }
+                    canvasDraw.remove(currObj);
+                    canvasDraw.add(textSample).renderAll();
+                    canvasDraw.setActiveObject(canvasDraw.item(canvasDraw.getObjects().length-1));
+                }
+                
+            });
+            
+            $('.inputText').on('keyup', function() {  
+                var currObj = canvasDraw.getActiveObject()
+                if(getType(currObj, 'text') || getType(currObj, 'text-curved')){
+                    currObj.set({text: $(this).val()})
+                    changeText(currObj)
+                }else{
+                    addNewTextObj($(this).val())
+                    canvasDraw.getActiveObject().text = $(this).val();
+                }
+            });
+
+            $('.sel-color').on('change', function(){ 
+                var currObj = canvasDraw.getActiveObject(); 
+                var select = $(this).children('option:selected').val();
+                var a = changeTextColor(currObj, select);
+                console.log(a)
+            });
+
+            $('.btn-underline').on('click', function(){
+                var currObj = canvasDraw.getActiveObject(); 
+                setTextUnderLine(currObj)
+            });
+
+            $('.btn-remove').on('click', function(){
+                var currObj = canvasDraw.getActiveObject();
+                if(canvasDraw.remove(currObj)){
+                    $('.inputText').val('');
+                }
+            });
+
+            $('.btn-remove-all').on('click', function(){
+                removeAllObject(canvasDraw)
+            });
+        
+            $('#input-img').on('change', function(){
+                var file = $(this)[0].files[0];
+                var fileType = $(this)[0].files[0].type;
+                var reader = new FileReader();
+                var url = URL.createObjectURL(file);
+                if (fileType === 'image/png') {
+                   var imga = fabric.Image.fromURL(url, function(img) {
+                        img.set({top:20, left: 20})
+                        canvasDraw.add(img);
+                        editDeleteBtn(img.oCoords.tr.x, img.oCoords.tr.y);
+                        canvasDraw.setActiveObject(canvasDraw.item(canvasDraw.getObjects().length-1));
+                    });
+                } 
+            });
+        });
+
+        function intiBg () { 
+            var arrImg = [];
+            var imgs = {
+                body: './img/เงาเสื้อ.png'
+            }
+            var img2 = {
+                body: './img/lg-ตัวเสื้อ.png'
+            }
+
+            arrImg.push(imgs)
+            arrImg.push(img2)
+
+            arrImg.forEach(ele => {
+                fabric.Image.fromURL(ele.body,function(img){
+                    img.scale(0.1)
+                    img.set({
+                        id: 'body',
+                        scale: 0.1,
+                        left: -20,
+                        top: -30
+                    })
+                    img.setControlsVisibility({
+                        bl: false,
+                        br: false,
+                        tl: false,
+                        tr: false,
+                        mt: false,
+                        mb: false,
+                        mr: false,
+                        ml: false,
+                        mtr: false, 
+                    });
+                    canvas.add(img)
+                    canvas.sendToBack(img);
+                });    
+            });
+        }
+
+        function addNewTextObj (text) {
+            var uid = new Date().getTime();
+            var text = new fabric.Text(text, { id: uid, left: 30, top: 50 });
+            var textX = text.oCoords.tr.x;
+            var textY = text.oCoords.tr.y
+            text.set('fill', '#FFF');
+            editDeleteBtn(textX, textY);
+            canvasDraw.add(text);
+            canvasDraw.bringToFront(text)
+            canvasDraw.setActiveObject(text)
+            canvasDraw.renderAll()
+        }
+
+        function changeText(currObj){
+            var propsId = currObj.id
+            var newText = null; 
+
+            if(getType(currObj, 'text')){
+                var props = currObj.toObject();
+                canvasDraw.remove(currObj)
+                newText = new fabric.Text('', props);
+                
+            }else{
+                var prop = currObj.toObject();
+                canvasDraw.remove(currObj)
+                newText =createCurveText('',prop)
+            }
+
+            var currObjX = currObj.oCoords.tr.x;
+            var currObjY = currObj.oCoords.tr.y
+            editDeleteBtn(currObjX, currObjY);
+
+            newText.set({id: propsId})
+            canvasDraw.add(newText);
+            canvasDraw.bringToFront(newText)
+            canvasDraw.setActiveObject(newText)
+            canvasDraw.renderAll()
+        }
+
+        function removeAllObject(CanvasTarget) {
+            var objs = CanvasTarget.getObjects()
+                objs.forEach(function (ele, i) {
+                    canvasDraw.remove(objs[i])
+                });
+            $('.inputText').val('')
+            CanvasTarget.renderAll()
+        }
+
+        function setTextUnderLine (currObj) { 
+            if(getType(currObj, 'text')){
+                if(currObj.underline == false){
+                    currObj.set({underline: true})
+                }else{
+                    currObj.set({underline: false})
+                }
+                canvasDraw.renderAll()
+                return true;
+            }else{
+                return "กรุณาเลือกข้อความ";
+            }
+        }
+
+        function changeTextColor(currObj, color) { 
+            if(getType(currObj, 'text') || getType(currObj, 'text-curved')  && color != ''){
+                currObj.set({fill: color})
+                canvasDraw.renderAll()
+                return true;
+            }else{
+                return "กรุณาเลือกข้อความ";
+            }
+        }
+
+        function getType(obj, type) {
+            if(obj != undefined && obj != null){
+                if(obj.isType(type)) return true;
+            }else{
+                return false;
+            }
+        }
+
+        function createCurveText (text ,prop){
+            var newText = null ;
+            
+            if(prop){
+              newText  = newText = new fabric.TextCurved('', prop);
+            }else{
+                newText = new fabric.TextCurved(text, {
+                    diameter: 360,
+                    fontSize: 22,
+                    fontFamily: 'Arial',
+                    left: 0,
+                    top: 0,
+                    fill: '#FFF',
+                });
+            }
+            
+            newText.setControlsVisibility({
+                bl: false,
+                br: false,
+                tl: false,
+                tr: false,
+                mt: false,
+                mb: false,
+                mr: false,
+                ml: false,
+            });
+
+            return newText;
+        }
+        
+        function disableScrolling(){
+            $('html, body').css({
+                overflow: 'hidden',
+                height: '100%'
+            });
+        }
+
+        function enableScrolling(){
+            $('html, body').css({
+                overflow: 'auto',
+                height: 'auto'
+            });
+        }
+    </script>
+</body>
+</html>

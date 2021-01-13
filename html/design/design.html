@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
-  <title>Document</title>
+  <link rel="shortcut icon" href="../../assets/img/pmk-icon.ico" />
+  <title>Design</title>
 
   <link rel="stylesheet" href="../../dist/css/master.css">
   <link rel="stylesheet" href="../../dist/css/design/design.css">
@@ -50,7 +50,7 @@
             <div class="menu-group" id="acc-coll-menu">
             </div>
             <div class="sample-price">
-              <div class="price"><span>B</span><span>123.00</span></div>
+              <div class="price"><span>฿</span><span>123.00</span></div>
               <div class="note">
                 <span>*ราคานี้เฉพาะเสื้อตามแบบยกเว้นงานปัก-สกรีน</span><span>ติดต่อพนักงานขายเพิ่มเติม</span>
               </div>
@@ -62,8 +62,8 @@
           </div>
           <div class="model-preview col-6">
             <div class="model-show-wrapper">
-              <div class="model-show-frame" id="model-show-frame" style="display: ;">
-                <div class="model-show" data-view="font" style="display: flex; justify-content: center;">
+              <div class="model-show-frame" id="model-show-frame">
+                <div class="model-show" id="model-show" data-view="font" style="display: flex; justify-content: center;">
                   
                 </div>
               </div>
@@ -213,25 +213,26 @@
 
   <script src="../../dist/js/jquery/3.5.1/jquery-3.5.1.min.js"></script>
   <script src="../../dist/js/jquery/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+  <script src="../../dist/js/dom-to-image.min.js"></script>
   <script src="../../dist/js/util/dialog.js"></script>
   <script src="../../dist/js/jsGolbal.js"></script>
   <script src="../../dist/js/design/init.js"></script>
 
   <script>
-    // $(document).ready(function () {
+    $(document).ready(function () {
         
-    //       var body = document.getElementById("model-show-frame");
-    //       // console.log(body)
-    //       $('.step-3').on('click', function(){
-    //         domtoimage.toPng(body).then(function(dataUrl) {
-    //         // document.body.appendChild(img);
-    //         // console.log(img)
-    //         var img = new Image();
-    //         img.src = dataUrl;
-    //         $(img).appendTo('body');
-    //       })
-    //       });
-      // });
+          var body = document.getElementById("model-show");
+          // console.log(body)
+            domtoimage.toPng(body).then(function(dataUrl) {
+            // document.body.appendChild(img);
+            // console.log(img)
+            var img = new Image();
+            img.src = dataUrl;
+            $(img).appendTo('body');
+
+            $('.other-side-item').css('background-image','url('+dataUrl+')').css('background-size','100% 100%')
+          })
+      });
   </script>
 </body>
 
